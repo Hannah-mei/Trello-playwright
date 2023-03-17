@@ -3,8 +3,7 @@ require('dotnev').config()
 
 // const KEY = 'cbfbe9459c74b47e7ff36154e638b4eb';
 // const TOKEN = 'ATTA2919baf315a330c56d2b9248baf29bf5570f458d974ff0ea06f4974c532cb128FF5714F7';
-const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
-const MEMBER = 'hannayakovlieva1'
+
 
 let boardNamesAndIds = {};
 let listNamesAndIds = {};
@@ -18,6 +17,8 @@ exports.Trello = class Trello {
     }
 
     async getAllBoards() {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
+        const MEMBER = 'hannayakovlieva1'
         const allBoards = await this.request.get(`/1/members/${MEMBER}/boards${AUTH}`);
         const response = await allBoards.json();
         for (let i=0; i<response.length; i++) {
@@ -26,6 +27,7 @@ exports.Trello = class Trello {
     }
 
     async getListsOnABoard(board) {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         await this.getAllBoards();
         const idBoard = boardNamesAndIds[board];
         const allLists = await this.request.get(`/1/boards/${idBoard}/lists${AUTH}`);
@@ -36,6 +38,7 @@ exports.Trello = class Trello {
     }
 
     async getAllCardsOnAList(listName) {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         const idList = listNamesAndIds[listName];
         const allCards = await this.request.get(`/1/lists/${idList}/cards${AUTH}`);
         const response = await allCards.json();
@@ -45,6 +48,7 @@ exports.Trello = class Trello {
     }
 
     async createBoard(name) {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         const newBoard = await this.request.post(`/1/boards/${AUTH}`, {
             data: {
                 name: name,
@@ -54,6 +58,7 @@ exports.Trello = class Trello {
    }
 
     async createList(name, boardName) {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         await this.getAllBoards();
         const idBoard = boardNamesAndIds[boardName];
         const newList = await this.request.post(`/1/lists${AUTH}`, {
@@ -73,6 +78,7 @@ exports.Trello = class Trello {
     }
 
     async createCard(name, listName, boardName) {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         await this.getListsOnABoard(boardName);
         const idList = listNamesAndIds[listName];
         const newCard = await this.request.post(`/1/cards${AUTH}`, {
@@ -96,6 +102,7 @@ exports.Trello = class Trello {
     }
 
     async moveCard(cardName, currentList, newList, boardName) {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         await this.getListsOnABoard(boardName);
         await this.getAllCardsOnAList(currentList);
         const idCard = cardsNamesAndIds[cardName];
@@ -115,6 +122,7 @@ exports.Trello = class Trello {
     }
 
     async deleteAllBoards() {
+        const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
         await this.getAllBoards();
         let boardIds = Object.values(boardNamesAndIds);
         for (let i=0; i<boardIds.length; i++) {
