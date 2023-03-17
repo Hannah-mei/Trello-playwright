@@ -2,7 +2,7 @@ const { expect} = require('@playwright/test')
 
 // const KEY = 'cbfbe9459c74b47e7ff36154e638b4eb';
 // const TOKEN = 'ATTA2919baf315a330c56d2b9248baf29bf5570f458d974ff0ea06f4974c532cb128FF5714F7';
-const AUTH = `?key=${KEY}&token=${TOKEN}`;
+const AUTH = `?key=${this.KEY}&token=${this.TOKEN}`;
 const MEMBER = 'hannayakovlieva1'
 
 let boardNamesAndIds = {};
@@ -11,7 +11,9 @@ let cardsNamesAndIds = {};
 
 exports.Trello = class Trello {
     constructor (request) {
-        this.request = request
+        this.request = request;
+        this.KEY = process.env.KEY;
+        this.TOKEN = process.env.TOKEN
     }
 
     async getAllBoards() {
