@@ -15,4 +15,4 @@ jobs:
       - name: Install playwright browsers
         run: npx playwright install --with-deps
       - name: Run tests
-        run: npx playwright test
+        run: KEY=${{ vars.KEY }} TOKEN = ${{ vars.TOKEN }} npx playwright test
