@@ -18,4 +18,5 @@ jobs:
         env:
           KEY: ${{ vars.KEY }}
           TOKEN: ${{ vars.TOKEN }}
-        run: KEY=$KEY TOKEN=$TOKEN  npx playwright test
+          MEMBER: ${{ vars.MEMBER }}
+        run: KEY=$KEY TOKEN=$TOKEN MEMBER=$MEMBER npx playwright test

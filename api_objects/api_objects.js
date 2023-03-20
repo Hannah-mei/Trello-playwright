@@ -3,7 +3,6 @@ const { expect} = require('@playwright/test')
 // const KEY = 'cbfbe9459c74b47e7ff36154e638b4eb';
 // const TOKEN = 'ATTA2919baf315a330c56d2b9248baf29bf5570f458d974ff0ea06f4974c532cb128FF5714F7';
 const AUTH = `?key=${process.env.KEY}&token=${process.env.TOKEN}`;
-const MEMBER = 'hannayakovlieva1'
 
 
 let boardNamesAndIds = {};
@@ -16,7 +15,7 @@ exports.Trello = class Trello {
     }
 
     async getAllBoards() {
-        const allBoards = await this.request.get(`/1/members/${MEMBER}/boards${AUTH}`);
+        const allBoards = await this.request.get(`/1/members/${process.env.MEMBER}/boards${AUTH}`);
         const response = await allBoards.json();
         for (let i=0; i<response.length; i++) {
             boardNamesAndIds[response[i].name] = response[i].id
